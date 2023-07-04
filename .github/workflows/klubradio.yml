@@ -1,0 +1,22 @@
+name: Klubradio Feed Update
+run-name: Klubradio Feed Update
+on:
+  schedule:
+    - cron: '0 12 * * *'
+jobs:
+  Create-New-Feed:
+    name: Create New Feed
+    runs-on: ubuntu-latest
+    steps:
+      - name: Crew
+        uses: actions/checkout@v3
+      - name: Create New Feed
+        run: ./update-feed.sh
+      - name: Commit and Push
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git add klubradio.json
+          git commit -m "Update feed"
+          git push origin main
+
