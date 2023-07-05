@@ -1,6 +1,51 @@
 #!/bin/bash
 
-STREAM_URL="https://www.klubradio.hu/data/hanganyagok/"$(date +%Y/%-m/%-d)"/archivum_alenyeg18_"$(date +%y%m%d)".mp3"
+# Broadcast schedule: 7:00AM, 10:00AM, 12:00PM, 4:00PM, 6:00PM Central European Time
+# Source: https://www.klubradio.hu/musorok/a-lenyeg-3
+
+HOUR=$(date +%H)
+
+FILE_PREFIX=""
+case $HOUR in
+  17)
+    FILE_PREFIX="18"
+    ;;
+  15)
+    FILE_PREFIX="16"
+    ;;
+  11)
+    FILE_PREFIX="12"
+    ;;
+  09)
+    FILE_PREFIX="10"
+    ;;
+  06)
+    FILE_PREFIX="07"
+    ;;
+esac
+
+if [ -z "$FILE_PREFIX" ]; then
+  echo "Could not determine file prefix for hour ${HOUR}"
+  exit 1
+fi
+
+
+STREAM_URL="https://www.klubradio.hu/data/hanganyagok/"$(date +%Y/%-m/%-d)"/archivum_alenyeg${FILE_PREFIX}_"$(date +%y%m%d)".mp3"
+CURRENT_URL=$(cat klubradio.json | jq -r '.streamUrl')
+
+if [ "${CURRENT_URL}" == "${STREAM_URL}" ]; then
+  echo "Stream URL has not changed. Exiting."
+  exit 0
+fi
+
+# Check to see if stream exists using a HEAD call
+curl --output /dev/null --silent --head --fail "${STREAM_URL}"
+RC=$?
+if [ ${RC} -ne 0 ]; then
+  echo "No updated stream found at ${STREAM_URL}. Status code: ${RC}"
+  exit 0
+fi
+
 UUID=$(uuidgen)
 UPDATED=$(date +%Y-%m-%dT%H:%M:%S%:z)
 
