@@ -4,10 +4,11 @@ on:
   push:
     paths:
       - '**.sh'
+  workflow_dispatch:
 jobs:
   ShellCheck:
     name: Create New Feed
     runs-on: ubuntu-latest
     steps:
       - name: Check Shell Script
-        run: shellcheck update-feed.sh
+        run: shellcheck ./update-feed.sh
