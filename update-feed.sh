@@ -30,8 +30,8 @@ if [ -z "$FILE_PREFIX" ]; then
 fi
 
 
-STREAM_URL="https://www.klubradio.hu/data/hanganyagok/"$(date +%Y/%-m/%-d)"/archivum_alenyeg${FILE_PREFIX}_"$(date +%y%m%d)".mp3"
-CURRENT_URL=$(cat klubradio.json | jq -r '.streamUrl')
+STREAM_URL="https://www.klubradio.hu/data/hanganyagok/$(date +%Y/%-m/%-d)/archivum_alenyeg${FILE_PREFIX}_$(date +%y%m%d).mp3"
+CURRENT_URL=$(jq -r '.streamUrl' < klubradio.json)
 
 if [ "${CURRENT_URL}" == "${STREAM_URL}" ]; then
   echo "Stream URL has not changed. Exiting."
@@ -51,17 +51,15 @@ UPDATED=$(date +%Y-%m-%dT%H:%M:%S%:z)
 
 cat <<EOF > /tmp/update.json
 {
-  "uid": "urn:uuid:$UUID",
-  "updateDate": "$UPDATED",
+  "uid": "urn:uuid:${UUID}",
+  "updateDate": "${UPDATED}",
   "titleText": "Latest news from Klub Radio",
   "mainText": "",
-  "streamUrl": "$STREAM_URL",
+  "streamUrl": "${STREAM_URL}",
   "redirectionUrl": "https://www.klubradio.hu/"
 }
 EOF
 
 mv /tmp/update.json ./klubradio.json
-
-cat klubradio.json
 
 exit 0
