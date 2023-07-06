@@ -35,7 +35,7 @@ CURRENT_URL=$(cat klubradio.json | jq -r '.streamUrl')
 
 if [ "${CURRENT_URL}" == "${STREAM_URL}" ]; then
   echo "Stream URL has not changed. Exiting."
-  exit 0
+  exit 2
 fi
 
 # Check to see if stream exists using a HEAD call
@@ -43,7 +43,7 @@ curl --output /dev/null --silent --head --fail "${STREAM_URL}"
 RC=$?
 if [ ${RC} -ne 0 ]; then
   echo "No updated stream found at ${STREAM_URL}. Status code: ${RC}"
-  exit 0
+  exit 2
 fi
 
 UUID=$(uuidgen)
@@ -63,3 +63,5 @@ EOF
 mv /tmp/update.json ./klubradio.json
 
 cat klubradio.json
+
+exit 0
