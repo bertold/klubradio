@@ -7,8 +7,9 @@ on:
   workflow_dispatch:
 jobs:
   ShellCheck:
-    name: Create New Feed
-    runs-on: linux
+    name: ShellCheck
+    runs-on: ubuntu-latest
     steps:
-      - name: Check Shell Script
-        run: shellcheck ./update-feed.sh
+      - uses: actions/checkout@v3
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
