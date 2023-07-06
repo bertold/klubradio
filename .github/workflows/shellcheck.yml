@@ -1,0 +1,13 @@
+name: Check Shell Script
+run-name: Check Shell Script
+on:
+  push:
+    paths:
+      - '**.sh'
+jobs:
+  ShellCheck:
+    name: Create New Feed
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Shell Script
+        run: shellcheck update-feed.sh
