@@ -2,7 +2,7 @@ name: Klubradio Feed Update
 run-name: Klubradio Feed Update
 on:
   schedule:
-    - cron: '30 17,15,11,9,6 * * *'
+    - cron: '45 17,15,11,9,6 * * *'
   workflow_dispatch:
 jobs:
   Create-New-Feed:
