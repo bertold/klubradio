@@ -2,7 +2,7 @@ name: Klubradio Feed Update
 run-name: Klubradio Feed Update
 on:
   schedule:
-    - cron: '45 17,15,11,9,6 * * *'
+    - cron: '45 18,17,16,15,12,11,10,9,6 * * *'
   workflow_dispatch:
 jobs:
   Create-New-Feed:
@@ -14,11 +14,5 @@ jobs:
       - name: Create New Feed
         run: ./update-feed.sh
       - name: Commit and Push
-        if: ${{ success() }}
-        run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-          git add klubradio.json
-          git commit -m "Update feed"
-          git push origin main
+        run: ./commit-feed.sh
 

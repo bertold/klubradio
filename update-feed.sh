@@ -7,19 +7,19 @@ HOUR=$(date +%H)
 
 FILE_PREFIX=""
 case $HOUR in
-  17)
+  17 | 18)
     FILE_PREFIX="18"
     ;;
-  15)
+  15 | 16)
     FILE_PREFIX="16"
     ;;
-  11)
+  11 | 12)
     FILE_PREFIX="12"
     ;;
-  09)
+  09 | 10)
     FILE_PREFIX="10"
     ;;
-  06)
+  06 | 07)
     FILE_PREFIX="07"
     ;;
 esac
@@ -34,7 +34,7 @@ CURRENT_URL=$(jq -r '.streamUrl' < klubradio.json)
 
 if [ "${CURRENT_URL}" == "${STREAM_URL}" ]; then
   echo "Stream URL has not changed. Exiting."
-  exit 2
+  exit 0
 fi
 
 # Check to see if stream exists using a HEAD call
@@ -42,7 +42,7 @@ curl --output /dev/null --silent --head --fail "${STREAM_URL}"
 RC=$?
 if [ ${RC} -ne 0 ]; then
   echo "No updated stream found at ${STREAM_URL}. Status code: ${RC}"
-  exit 2
+  exit 0
 fi
 
 UUID=$(uuidgen)
