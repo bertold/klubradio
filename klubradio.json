@@ -1,8 +1,8 @@
 {
-  "uid": "urn:uuid:65791564-4dbc-4d78-a4de-179bc5a56cac",
-  "updateDate": "2023-07-10T11:50:40+00:00",
+  "uid": "urn:uuid:0e59e8f3-bb32-4db5-ae7d-0405811f5512",
+  "updateDate": "2023-07-10T15:50:41+00:00",
   "titleText": "Latest news from Klub Radio",
   "mainText": "",
-  "streamUrl": "https://www.klubradio.hu/data/hanganyagok/2023/7/10/archivum_alenyeg12_230710.mp3",
+  "streamUrl": "https://www.klubradio.hu/data/hanganyagok/2023/7/10/archivum_alenyeg16_230710.mp3",
   "redirectionUrl": "https://www.klubradio.hu/"
 }
