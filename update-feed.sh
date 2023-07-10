@@ -13,13 +13,13 @@ case $HOUR in
   15 | 16)
     FILE_PREFIX="16"
     ;;
-  11 | 12)
+  11 | 12 | 13)
     FILE_PREFIX="12"
     ;;
   09 | 10)
     FILE_PREFIX="10"
     ;;
-  06 | 07)
+  06 | 07 | 08)
     FILE_PREFIX="07"
     ;;
 esac
