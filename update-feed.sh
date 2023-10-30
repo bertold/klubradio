@@ -7,7 +7,7 @@ HOUR=$(date +%H)
 
 FILE_PREFIX=""
 case $HOUR in
-  17 | 18)
+  17 | 18 | 19 | 20)
     FILE_PREFIX="18"
     ;;
   15 | 16)
@@ -29,7 +29,7 @@ if [ -z "$FILE_PREFIX" ]; then
   exit 1
 fi
 
-STREAM_URL="https://www.klubradio.hu/data/hanganyagok/$(date +%Y/%-m/%-d)/archivum_alenyeg_${FILE_PREFIX}_$(date +%y%m%d).mp3"
+STREAM_URL="https://www.klubradio.hu/data/hanganyagok/$(date +%Y/%-m/%-d)/archivum_alenyeg${FILE_PREFIX}_$(date +%y%m%d).mp3"
 CURRENT_URL=$(jq -r '.streamUrl' < klubradio.json)
 
 if [ "${CURRENT_URL}" == "${STREAM_URL}" ]; then
