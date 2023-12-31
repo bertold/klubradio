@@ -45,11 +45,11 @@ if [ "${CURRENT_URL}" == "${STREAM_URL2}" ]; then
 fi
 
 # Check to see if stream exists using a HEAD call
-curl --output /dev/null --silent --head --fail "${STREAM_URL}"
+curl --output /dev/null --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2.1 Safari/605.1.15' --silent --head --fail "${STREAM_URL}"
 RC=$?
 NEW_URL=${STREAM_URL}
 if [ ${RC} -ne 0 ]; then
-  curl --output /dev/null --silent --head --fail "${STREAM_URL2}"
+  curl --output /dev/null --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2.1 Safari/605.1.15' --silent --head --fail "${STREAM_URL2}"
   RC=$?
   if [ ${RC} -ne 0 ]; then
     echo "No updated stream found at either ${STREAM_URL} or ${STREAM_URL2}. Status code: ${RC}"
