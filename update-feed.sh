@@ -30,6 +30,8 @@ if [ -z "$FILE_PREFIX" ]; then
 fi
 
 STREAM_URL="https://www.klubradio.hu/data/hanganyagok/$(date +%Y/%-m/%-d)/archivum_alenyeg${FILE_PREFIX}_$(date +%y%m%d).mp3"
+STREAM_URL2="https://www.klubradio.hu/data/hanganyagok/$(date +%Y/%-m/%-d)/archivum_alenyeg_${FILE_PREFIX}_$(date +%y%m%d).mp3"
+
 CURRENT_URL=$(jq -r '.streamUrl' < klubradio.json)
 
 if [ "${CURRENT_URL}" == "${STREAM_URL}" ]; then
@@ -37,12 +39,23 @@ if [ "${CURRENT_URL}" == "${STREAM_URL}" ]; then
   exit 0
 fi
 
+if [ "${CURRENT_URL}" == "${STREAM_URL2}" ]; then
+  echo "Stream URL has not changed. Exiting."
+  exit 0
+fi
+
 # Check to see if stream exists using a HEAD call
 curl --output /dev/null --silent --head --fail "${STREAM_URL}"
 RC=$?
+NEW_URL=${STREAM_URL}
 if [ ${RC} -ne 0 ]; then
-  echo "No updated stream found at ${STREAM_URL}. Status code: ${RC}"
-  exit 0
+  curl --output /dev/null --silent --head --fail "${STREAM_URL2}"
+  RC=$?
+  if [ ${RC} -ne 0 ]; then
+    echo "No updated stream found at either ${STREAM_URL} or ${STREAM_URL2}. Status code: ${RC}"
+    exit 0
+  fi
+  NEW_URL=${STREAM_URL2}
 fi
 
 UUID=$(uuidgen)
@@ -54,7 +67,7 @@ cat <<EOF > /tmp/update.json
   "updateDate": "${UPDATED}",
   "titleText": "Latest news from Klub Radio",
   "mainText": "",
-  "streamUrl": "${STREAM_URL}",
+  "streamUrl": "${NEW_URL}",
   "redirectionUrl": "https://www.klubradio.hu/"
 }
 EOF
