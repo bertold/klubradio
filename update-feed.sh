@@ -7,7 +7,7 @@ HOUR=$(date +%H)
 
 FILE_PREFIX=""
 case $HOUR in
-  17 | 18 | 19 | 20)
+  17 | 18 | 19 | 20 | 21 | 22 | 23)
     FILE_PREFIX="18"
     ;;
   14 | 15 | 16)
@@ -19,7 +19,7 @@ case $HOUR in
   09 | 10)
     FILE_PREFIX="10"
     ;;
-  06 | 07 | 08)
+  01 | 02 | 03 | 04 | 05 | 06 | 07 | 08)
     FILE_PREFIX="07"
     ;;
 esac
