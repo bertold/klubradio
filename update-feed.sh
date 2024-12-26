@@ -41,15 +41,9 @@ fi
 # Check to see if stream exists using a HEAD call
 curl --output /dev/null --header "User-Agent: ${USER_AGENT}" --silent --head --fail "${STREAM_URL}"
 RC=$?
-NEW_URL=${STREAM_URL}
 if [ ${RC} -ne 0 ]; then
-  curl --output /dev/null --header "User-Agent: ${USER_AGENT}" --silent --head --fail "${STREAM_URL2}"
-  RC=$?
-  if [ ${RC} -ne 0 ]; then
-    echo "No updated stream found at either ${STREAM_URL}. Status code: ${RC}"
-    exit 0
-  fi
-  NEW_URL=${STREAM_URL2}
+  echo "No updated stream found at either ${STREAM_URL}. Status code: ${RC}"
+  exit 0
 fi
 
 UUID=$(uuidgen)
