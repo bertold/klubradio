@@ -55,7 +55,7 @@ cat <<EOF > /tmp/update.json
   "updateDate": "${UPDATED}",
   "titleText": "Latest news from Klub Radio",
   "mainText": "",
-  "streamUrl": "${NEW_URL}",
+  "streamUrl": "${STREAM_URL}",
   "redirectionUrl": "https://www.klubradio.hu/"
 }
 EOF
