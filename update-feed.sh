@@ -29,8 +29,8 @@ if [ -z "$FILE_PREFIX" ]; then
   exit 1
 fi
 
-STREAM_URL="https://www.klubradio.hu/data/hanganyagok/$(date +%Y/%-m/%-d)/archivum_alenyeg${FILE_PREFIX}_$(date +%y%m%d).mp3"
-USER_AGENT="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.2 Safari/605.1.15"
+STREAM_URL="https://www.klubradio.hu/data/hanganyagok/$(date +%Y/%-m/%-d)/archivum_alenyeg_${FILE_PREFIX}_$(date +%y%m%d).mp3"
+USER_AGENT="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
 CURRENT_URL=$(jq -r '.streamUrl' < klubradio.json)
 
 if [ "${CURRENT_URL}" == "${STREAM_URL}" ]; then
