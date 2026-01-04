@@ -1,8 +1,8 @@
 {
-  "uid": "urn:uuid:fae3b0c6-7ca6-477a-9910-791956cfeac5",
-  "updateDate": "2026-01-04T10:49:10+00:00",
+  "uid": "urn:uuid:c6b1e03d-17c0-48c7-925a-72c5b90f2810",
+  "updateDate": "2026-01-04T13:00:45+00:00",
   "titleText": "Latest news from Klub Radio",
   "mainText": "",
-  "streamUrl": "https://www.klubradio.hu/data/hanganyagok/2026/1/4/archivum_alenyeg_10_260104.mp3",
+  "streamUrl": "https://www.klubradio.hu/data/hanganyagok/2026/1/4/archivum_alenyeg_12_260104.mp3",
   "redirectionUrl": "https://www.klubradio.hu/"
 }
