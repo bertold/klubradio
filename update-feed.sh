@@ -29,7 +29,7 @@ if [ -z "$FILE_PREFIX" ]; then
   exit 1
 fi
 
-STREAM_URL="https://www.klubradio.hu/data/hanganyagok/$(date +%Y/%-m/%-d)/archivum_alenyeg_${FILE_PREFIX}_$(date +%y%m%d).mp3"
+STREAM_URL="https://www.klubradio.hu/data/hanganyagok/$(date +%Y/%-m/%-d)/archivum_alenyeg${FILE_PREFIX}_$(date +%y%m%d).mp3"
 USER_AGENT=$(curl -s https://raw.githubusercontent.com/jnrbsn/user-agents/refs/heads/main/user-agents.json | jq '.[1]')
 if [ -z "$USER_AGENT" ]; then
   USER_AGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
